@@ -24,13 +24,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// set port, listen for requests
 require("./app/routes/products.routes.js")(app);
 
 // Catch any routes
 app.use('*', (req, res) => {
   res.status(404).json({
-      status: 404,
       message: "Not Found!"
   });
 });
