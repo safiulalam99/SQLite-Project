@@ -12,27 +12,27 @@ function checkIdParam(req, res, next) {
 }
 
 module.exports = app => {
-    const products = require("../controllers/products.controller.js");
+    const customer = require("../controllers/customer.controller.js");
   
     var router = require("express").Router();
   
     // Create a new Product
-    router.post("/", products.create);
+    router.post("/", customer.create);
   
-    // Retrieve all Products
-    router.get("/", products.findAll);
+    // Retrieve all customer
+    router.get("/", customer.findAll);
   
     // Retrieve a single Product with id
-    router.get("/:id", checkIdParam, products.findOne);
+    router.get("/:id", checkIdParam, customer.findOne);
   
     // Update a Product with id
-    router.put("/:id", products.update);
+    router.put("/:id", customer.update);
   
     // Delete a Product with id
-    router.delete("/:id", products.delete);
+    router.delete("/:id", customer.delete);
   
-    // Delete all Products
-    router.delete("/", products.deleteAll);
+    // Delete all customer
+    router.delete("/", customer.deleteAll);
   
-    app.use('/api/products', router);
+    app.use('/api/customer', router);
 };

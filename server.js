@@ -25,6 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 require("./app/routes/products.routes.js")(app);
+require("./app/routes/order.routes.js")(app);
+require("./app/routes/customer.routes.js")(app);
+require('./app/routes/order-product.routes.js')(app);
 
 // Catch any routes
 app.use('*', (req, res) => {
