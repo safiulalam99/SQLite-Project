@@ -1,23 +1,23 @@
 const express = require("express");
-const sequelize = require("./database");
-const User = require("./User");
+const sequelize = require("./config/database");
+const userRoutes = require('./routes/userRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const errorHandler = require('./middleware/errorHandler');
 
-sequelize.sync({ force: true }).then(() => console.log("db is running"));
+sequelize.sync().then(() => console.log("db is running"));
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use('/users', userRoutes);
+app.use('/orders', orderRoutes);
 
-app.get("/users", async (req, res) => {
-  const users = await User.findAll();
-  res.send(users);
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Page not found" });
 });
 
-app.post("/users", async (req, res) => {
-  await User.create(req.body);
-  res.send("User created successfully");
-});
+app.use(errorHandler);  // Use error handler middleware
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
