@@ -12,7 +12,15 @@ const Order = sequelize.define('order', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-});
+    price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            min: 1 
+        },
+    },
+},
+);
 
 module.exports = Order;
 

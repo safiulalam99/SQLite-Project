@@ -54,3 +54,20 @@ exports.getUsers = async (req, res, next) => {
     next(error); 
   }
 };
+
+exports.updateUser = async (req, res, next) => {
+  try {
+    const updated = await User.update(req.body, {
+      where: { id: req.params.id }
+    });
+
+    if (updated[0] === 1) { 
+      res.send({ message: 'User updated successfully.' });
+    } else {
+      res.status(404).send({ message: 'User not found.' });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+

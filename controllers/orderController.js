@@ -40,7 +40,23 @@ exports.updateOrder = async (req, res) => {
             returning: true,
             plain: true
         });
-        res.send("updated");
+        res.send({"message":"updated"});
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+exports.getOrdersWithUsers = async (req, res) => {
+    try {
+        const orders = await Order.findAll({
+            include: [User] 
+        });
+        if (orders && orders.length > 0) {
+            res.send(orders);
+        } else {
+            res.status(404).send('No orders found');
+        }
     } catch (error) {
         res.status(500).send(error.message);
     }

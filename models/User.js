@@ -1,13 +1,16 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../config/database");
-const Order = require('./Order');
+const Order = require("./Order");
 
-
-
-// Define User model
 const User = sequelize.define(
   "user",
   {
+    // userSeq: {
+    //   type: Sequelize.UUID,
+    //   defaultValue: Sequelize.UUIDV4,
+    //   allowNull: false,
+    // },
+
     firstName: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -15,11 +18,14 @@ const User = sequelize.define(
     lastName: {
       type: Sequelize.STRING,
       allowNull: false,
+      validate: {
+        len: [2, 100], 
+    }
     },
+
   },
   {
     indexes: [
-      // Create a unique index on email
       {
         unique: true,
         fields: ["firstName"],
@@ -28,11 +34,9 @@ const User = sequelize.define(
   }
 );
 
+User.hasMany(Order, { foreignKey: "userId" });
+Order.belongsTo(User, { foreignKey: "userId" });
 
-User.hasMany(Order, { foreignKey: 'userId' });
-Order.belongsTo(User, { foreignKey: 'id' });
-
-// Synchronize the database
 sequelize
   .sync()
   .then(() => {
