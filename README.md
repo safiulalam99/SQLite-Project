@@ -21,9 +21,9 @@ This project is a Node.js API application using Express, Sequelize, and SQLite. 
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/safiulalam99/SQLite-Project.git
-   ```
+```bash
+git clone https://github.com/safiulalam99/SQLite-Project.git
+```
 2. Navigate to the project directory:
 ```bash
 cd sqlite-project
@@ -32,6 +32,11 @@ cd sqlite-project
 ```bash
 npm install
 ```
+4. Run the Application
+```bash
+npm start
+```
+
 The server will start and listen on a default port (usually 3000).
 
 Access the API endpoints via a tool like Postman or a web browser, targeting http://localhost:3000/.
